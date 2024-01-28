@@ -423,13 +423,16 @@
   </ItemDefinitionGroup>
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="include\Device.cpp" />
     <ClCompile Include="Pinguino.cpp" />
+    <ClCompile Include="src\Decive.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinguino.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Device.h" />
     <ClInclude Include="include\Prerequisites.h" />
     <ClInclude Include="include\Resource.h" />
     <ClInclude Include="include\Window.h" />

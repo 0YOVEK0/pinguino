@@ -29,12 +29,19 @@
     <ClInclude Include="include\Resource.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Device.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pinguino.cpp" />
     <ClCompile Include="src\Window.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Decive.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Device.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinguino.fx">
