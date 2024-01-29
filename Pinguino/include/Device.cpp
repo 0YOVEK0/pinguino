@@ -85,3 +85,156 @@ Device::CreateDepthStencilView(ID3D11Resource* pResource,
 
 	return hr;
 }
+
+HRESULT 
+Device::CreateVertexShader(const void* pShaderBytecode, 
+	                       unsigned int BytecodeLength, 
+	                       ID3D11ClassLinkage* pClassLinkage, 
+	                       ID3D11VertexShader** ppVertexShader)
+{
+	HRESULT hr = S_OK;
+
+	if (pShaderBytecode == nullptr)
+	{
+		WARNING("ERROR Device::CreateVertexShader : Error in data from params[CHECK FOR const void* pShaderBytecode : OK]\n ")
+			exit(1);
+
+	}
+	else if (ppVertexShader == nullptr)
+	{
+		WARNING("ERROR Device:::CreateVertexShader : Error in data from params[CHECK FOR ID3D11VertexShader** ppVertexShader: OK]\n ")
+			exit(1);
+	}
+	else
+	{
+		hr = m_device->CreateVertexShader(pShaderBytecode,
+			                              BytecodeLength,
+			                              pClassLinkage,
+			                              ppVertexShader);
+		WARNING(" Device::CreateVertexShader : [CREATION OF RESOURCE : OK]\n ");
+			
+	}
+	return hr;
+}
+
+HRESULT 
+Device::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs, 
+	                      unsigned int NumElements, 
+	                      const void* pShaderBytecodeWithInputSignature,
+	                      unsigned int BytecodeLength, 
+	                      ID3D11InputLayout** ppInputLayout)
+{
+	HRESULT hr = S_OK;
+	if (pInputElementDescs == nullptr)
+	{
+		WARNING("ERROR Device::CreateInputLayout : Error in data from params[CHECK FOR const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs: OK]\n ")
+			exit(1);
+
+	}
+	else if (pShaderBytecodeWithInputSignature == nullptr)
+	{
+		WARNING("ERROR Device::CreateInputLayout : Error in data from params[CHECK FOR const void* pShaderBytecodeWithInputSignature: OK]\n ")
+			exit(1);
+		
+	}
+	else if (ppInputLayout == nullptr)
+	{
+		WARNING("ERROR Device::CreateInputLayout : Error in data from params[CHECK FOR ID3D11InputLayout** ppInputLayout: OK]\n ")
+			exit(1);
+	}
+	else
+	{
+		hr = m_device->CreateInputLayout(pInputElementDescs, 
+			                             NumElements, 
+			                             pShaderBytecodeWithInputSignature,
+			                             BytecodeLength, 
+			                             ppInputLayout);
+		WARNING("Device :: CreateInputLayout :[CREATION OF RESOURCE : OK]\n ");
+	}
+	return hr;
+}
+
+HRESULT 
+Device::CreatePixelShader(const void* pShaderBytecode, 
+	                      unsigned int BytecodeLength, 
+	                      ID3D11ClassLinkage* pClassLinkage, 
+	                      ID3D11PixelShader** ppPixelShader)
+{
+	HRESULT hr = S_OK;
+
+	if (pShaderBytecode == nullptr)
+	{
+		WARNING("ERROR Device::CreatePixelShader : Error in data from params[CHECK FOR const void* pShaderBytecode: OK]\n ")
+			exit(1);
+	}
+	else if (ppPixelShader == nullptr)
+	{
+		WARNING("ERROR Device::CreatePixelShader : Error in data from params[CHECK FOR ID3D11PixelShader** ppPixelShader: OK]\n ")
+			exit(1);
+
+	}
+	else
+	{
+		hr = m_device->CreatePixelShader(pShaderBytecode,
+			                             BytecodeLength,
+			                             pClassLinkage,
+			                             ppPixelShader);
+
+		WARNING("Device :: CreatePixelShader :[CREATION OF RESOURCE : OK]\n ");
+	}
+	return hr;
+}
+
+HRESULT 
+Device::CreateBuffer(const D3D11_BUFFER_DESC* pDesc, 
+	                 const D3D11_SUBRESOURCE_DATA* pInitialData, 
+	                 ID3D11Buffer** ppBuffer)
+{
+	HRESULT hr = S_OK;
+
+	if (pDesc == nullptr)
+	{
+		WARNING("ERROR Device::CreateBuffer : Error in data from params[CHECK FOR const D3D11_BUFFER_DESC* pDesc: OK]\n ")
+			exit(1);
+
+	}
+	else if (ppBuffer == nullptr)
+	{
+		WARNING("ERROR Device::CreateBuffer : Error in data from params[CHECK FOR ID3D11Buffer** ppBuffer: OK]\n ")
+			exit(1);
+	}
+	else
+	{
+		hr = m_device->CreateBuffer(pDesc, pInitialData, ppBuffer);
+		WARNING("Device :: CreateBuffer :[CREATION OF RESOURCE : OK]\n ");
+	}
+	return hr;
+}
+
+HRESULT 
+Device::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc,
+	                       ID3D11SamplerState** ppSamplerState)
+
+{
+	HRESULT hr = S_OK;
+		if (pSamplerDesc == nullptr)
+		{
+			WARNING("ERROR Device::CreateSamplerState : Error in data from params[CHECK FOR const D3D11_SAMPLER_DESC* pSamplerDesc: OK]\n ")
+				exit(1);
+		}
+		else if (ppSamplerState == nullptr)
+		{
+			WARNING("ERROR Device::CreateSamplerState : Error in data from params[CHECK FOR ID3D11SamplerState** ppSamplerState: OK]\n ")
+				exit(1);
+
+		}
+		else
+		{
+			hr = m_device->CreateSamplerState(pSamplerDesc, ppSamplerState);
+			WARNING("Device :: CreateBuffer :[CREATION OF RESOURCE : OK]\n ");
+
+		}
+	return hr;
+
+}
+
