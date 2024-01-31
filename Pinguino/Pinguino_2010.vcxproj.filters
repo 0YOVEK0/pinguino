@@ -35,6 +35,9 @@
     <ClInclude Include="include\DeviceContext.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\DepthStencilView.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pinguino.cpp" />
@@ -45,6 +48,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="include\Device.cpp" />
+    <ClCompile Include="src\DepthStencilView.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceContext.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinguino.fx">

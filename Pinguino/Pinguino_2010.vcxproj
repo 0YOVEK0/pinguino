@@ -426,12 +426,15 @@
     <ClCompile Include="include\Device.cpp" />
     <ClCompile Include="Pinguino.cpp" />
     <ClCompile Include="src\Decive.cpp" />
+    <ClCompile Include="src\DepthStencilView.cpp" />
+    <ClCompile Include="src\DeviceContext.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pinguino.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DepthStencilView.h" />
     <ClInclude Include="include\Device.h" />
     <ClInclude Include="include\DeviceContext.h" />
     <ClInclude Include="include\Prerequisites.h" />
