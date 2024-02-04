@@ -21,7 +21,7 @@
 // MACRO for safe release of resources
 #define SAFE_RELEASE(x) if(x != nullptr) x->Release(); x = nullptr;
 
-// * To check monster
+// * To check programm
 #define OutputLOG(_ClassName, _FunctionName, _OutputMessage)  \
 OutputDebugStringA(_ClassName);                               \
 OutputDebugStringA(" : In Function : ");                      \

@@ -586,9 +586,12 @@ void Render()
     g_World = XMMatrixRotationY( t );
 
     // Modify the color
-    g_vMeshColor.x = ( sinf( t * 1.0f ) + 1.0f ) * 0.5f;
+  /*  g_vMeshColor.x = ( sinf( t * 1.0f ) + 1.0f ) * 0.5f;
     g_vMeshColor.y = ( cosf( t * 3.0f ) + 1.0f ) * 0.5f;
-    g_vMeshColor.z = ( sinf( t * 5.0f ) + 1.0f ) * 0.5f;
+    g_vMeshColor.z = ( sinf( t * 5.0f ) + 1.0f ) * 0.5f;*/
+    g_vMeshColor.x = 1.0f;  // Componente rojo
+    g_vMeshColor.y = 1.0f;  // Componente verde
+    g_vMeshColor.z = 1.0f;  // Componente azul
 
     //
     // Clear the back buffer
