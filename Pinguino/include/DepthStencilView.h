@@ -4,7 +4,8 @@
 class Device;
 class DeviceContext;
 
-
+//DepthStencilView class encapsulates functionality related to depth stencil views in a Direct3D application,
+//providing methods for initialization, rendering, and resource management.
 class 
 DepthStencilView
 {

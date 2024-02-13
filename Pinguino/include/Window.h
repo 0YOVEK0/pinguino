@@ -1,6 +1,7 @@
 #pragma once
 #include "Prerequisites.h"
-//cambien la w por W
+//cambien la w por W xd esta parte tinia que ser en ingles pero wa , mejor te explico para que sirve jajajjas xd.
+//This class IS for managing a Windows window  also initialize it with the necessary parameters 
 class Window
 {
 public:

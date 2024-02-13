@@ -1,6 +1,7 @@
 #pragma once
 #include "Prerequisites.h"
-
+//The Device class encapsulates functionality related to a graphics device using Microsoft's Direct3D 11 API.
+// It provides methods for resource creation, initialization, rendering, and cleanup.
 class Device
 {
 public:

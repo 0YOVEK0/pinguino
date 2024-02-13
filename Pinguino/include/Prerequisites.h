@@ -1,4 +1,5 @@
 #pragma once
+//this are the structure to  relate librarys to the main ccp for it to work  also a little macro for debugging and keep it track the errors
 //std Lib
 #include <iostream>
 #include <sstream>

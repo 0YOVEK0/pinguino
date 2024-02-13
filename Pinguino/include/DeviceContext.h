@@ -1,6 +1,7 @@
 #pragma once
 #include "Prerequisites.h"
-
+//The DeviceContext class is designed to manage a Direct3D 11 device context, 
+//providing an interface for operations related to rendering and resource management.
 class DeviceContext
 {
 public:
