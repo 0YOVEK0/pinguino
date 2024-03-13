@@ -62,6 +62,12 @@
     <ClInclude Include="include\Viewport.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Model.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\objloader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pinguino.cpp" />
@@ -100,6 +106,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Viewport.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objloader.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
