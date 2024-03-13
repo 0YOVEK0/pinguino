@@ -4,14 +4,14 @@
 
 Texture::Texture()
 {
-	if (m_texture != nullptr)
+	/*if (m_texture != nullptr)
 	{
 		SAFE_RELEASE(m_texture);
 	}
 	else if (m_textureFromImg != nullptr)
 	{
 		SAFE_RELEASE(m_textureFromImg);
-	}
+	}*/
 }
 
 

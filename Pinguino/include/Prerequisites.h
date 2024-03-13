@@ -37,3 +37,30 @@ OutputDebugStringA("\n");
    os_ << s;                                 \
    OutputDebugStringW( os_.str().c_str() );  \
 }
+
+struct SimpleVertex
+
+{
+
+	XMFLOAT3 Pos;
+
+	XMFLOAT2 Tex;
+
+};
+
+
+
+
+struct Mesh {
+
+	std::string name;
+
+	std::vector <SimpleVertex> vertex;
+
+	std::vector <unsigned int> index;
+
+	int numVertex;
+
+	int numIndex;
+
+};
