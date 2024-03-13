@@ -68,6 +68,9 @@
     <ClInclude Include="include\objloader.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\OBJ_Loader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pinguino.cpp" />
@@ -109,6 +112,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\objloader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loadandp.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

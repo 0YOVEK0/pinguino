@@ -6,12 +6,15 @@
 #include <vector>
 #include <string>
 #include<chrono>
+#include <fstream>
+
 
 //External Lib
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <xnamath.h>
+#include <math.h>
 
 //windows
 #include <windows.h>
