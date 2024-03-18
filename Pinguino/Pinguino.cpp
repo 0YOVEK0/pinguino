@@ -22,16 +22,11 @@
 #include "Buffer.h"
 #include "SamplerState.h"
 #include "RenderTargetView.h"
+#include <xnamath.h>
+#include "OBJLoader.h"
 
-/*
-//--------------------------------------------------------------------------------------
-// Structures
-//--------------------------------------------------------------------------------------
-struct SimpleVertex
-{
-    XMFLOAT3 Pos;
-    XMFLOAT2 Tex;
-};*/
+
+
 
 struct CBNeverChanges
 {
@@ -78,23 +73,14 @@ XMMATRIX                            g_Projection;
 XMFLOAT4                            g_vMeshColor(0.7f, 0.7f, 0.7f, 1.0f);
 Mesh                                g_mesh;
 
-//ID3D11Texture2D*                    g_pDepthStencil = nullptr;
-//ID3D11DepthStencilView*             g_pDepthStencilView = nullptr;
-//ID3D11Device*                       g_pd3dDevice = nullptr;
-//ID3D11DeviceContext*                 g_deviceContext.m_deviceContext = nullptr;
-//HINSTANCE                           g_hInst = nullptr;
-//HWND                                g_hWnd = nullptr;
 
-//--------------------------------------------------------------------------------------
-// Forward declarations
-//--------------------------------------------------------------------------------------
-//HRESULT InitWindow( HINSTANCE hInstance, int nCmdShow );
 
 HRESULT InitDevice();
 void CleanupDevice();
-LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 void update();
 void Render();
+
 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
@@ -143,7 +129,7 @@ HRESULT CompileShaderFromFile(char* szFileName, LPCSTR szEntryPoint, LPCSTR szSh
 
     DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )
-   
+
     dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
 
@@ -235,8 +221,6 @@ HRESULT InitDevice()
     g_shaderProgram.init(g_device, "Pinguino.fx", Layout);
 
 
-   
-
     SimpleVertex vertices[] =
     {
          { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
@@ -269,6 +253,8 @@ HRESULT InitDevice()
         { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
         { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
     };
+
+  
 
 
     for (SimpleVertex vertex : vertices)
