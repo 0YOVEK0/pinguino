@@ -62,10 +62,7 @@
     <ClInclude Include="include\Viewport.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\objloader.h">
+    <ClInclude Include="include\ModelLoader.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\OBJ_Loader.h">
@@ -111,10 +108,7 @@
     <ClCompile Include="src\Viewport.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\objloader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\loadandp.cpp">
+    <ClCompile Include="src\ModelLoader.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

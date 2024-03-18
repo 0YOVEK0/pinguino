@@ -1,32 +1,32 @@
 //--------------------------------------------------------------------------------------
-// File: Pinguino.cpp
+// File: BananasEngine.cpp
 //
 // This application demonstrates texturing
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //--------------------------------------------------------------------------------------
-#include <windows.h>
-#include <d3d11.h>
-#include <d3dx11.h>
-#include <d3dcompiler.h>
-#include <xnamath.h>
-#include "resource.h"
+#include "Prerequisites.h"
 #include "Window.h"
 #include "Device.h"
 #include "DeviceContext.h"
 #include "DepthStencilView.h"
 #include "Texture.h"
-#include "SwapChain.h"
-#include "Viewport.h"
 #include "ShaderProgram.h"
+#include "SwapChain.h"
+#include "RenderTargetView.h"
+#include "Viewport.h"
 #include "Buffer.h"
 #include "SamplerState.h"
-#include "RenderTargetView.h"
-#include <xnamath.h>
-#include "OBJLoader.h"
+#include "ModelLoader.h"
 
-
-
+//--------------------------------------------------------------------------------------
+// Structures
+//--------------------------------------------------------------------------------------
+/*struct SimpleVertex
+{
+    XMFLOAT3 Pos;
+    XMFLOAT2 Tex;
+};*/
 
 struct CBNeverChanges
 {
@@ -65,8 +65,8 @@ ID3D11Buffer*                       g_pCBChangeOnResize = nullptr;
 ID3D11Buffer*                       g_pCBChangesEveryFrame = nullptr;
 ID3D11ShaderResourceView*           g_pTextureRV = nullptr;
 SamplerState                        g_sampler;
-
-
+ModelLoader                         g_modelLoader;
+LoadData                            LD;
 XMMATRIX                            g_World;
 XMMATRIX                            g_View;
 XMMATRIX                            g_Projection;
@@ -74,15 +74,19 @@ XMFLOAT4                            g_vMeshColor(0.7f, 0.7f, 0.7f, 1.0f);
 Mesh                                g_mesh;
 
 
-
+//--------------------------------------------------------------------------------------
+// Forward declarations
+//--------------------------------------------------------------------------------------
 HRESULT InitDevice();
 void CleanupDevice();
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-void update();
 void Render();
 
 
-
+//--------------------------------------------------------------------------------------
+// Entry point to the program. Initializes everything and goes into a message processing 
+// loop. Idle time is used to render the scene.
+//--------------------------------------------------------------------------------------
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
@@ -109,7 +113,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         else
         {
             Render();
-            update();
         }
     }
 
@@ -118,18 +121,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     return (int)msg.wParam;
 }
 
-
-
-
-
-
+//--------------------------------------------------------------------------------------
+// Helper for compiling shaders with D3DX11
+//--------------------------------------------------------------------------------------
 HRESULT CompileShaderFromFile(char* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
 {
     HRESULT hr = S_OK;
 
     DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )
-
+    // Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
+    // Setting this flag improves the shader debugging experience, but still allows 
+    // the shaders to be optimized and to run exactly the way they will run in 
+    // the release configuration of this program.
     dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
 
@@ -217,8 +221,13 @@ HRESULT InitDevice()
     texcoord.InstanceDataStepRate = 0;
     Layout.push_back(texcoord);
 
-    //Init Shader
-    g_shaderProgram.init(g_device, "Pinguino.fx", Layout);
+    //init Shader
+    g_shaderProgram.init(g_device, "pinguino.fx", Layout);
+
+    //Generar Mesh
+    //->Carga de modelo 3D
+    //Create Vertex buffer
+
 
 
     SimpleVertex vertices[] =
@@ -254,17 +263,19 @@ HRESULT InitDevice()
         { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
     };
 
-  
-
-
-    for (SimpleVertex vertex : vertices)
+    g_mesh = g_modelLoader.Load("17833_Penguin_v1.obj");
+    g_vertexBuffer.init(g_device, g_mesh, D3D11_BIND_VERTEX_BUFFER);
+    /*for (SimpleVertex vertex : vertices)
     {
         g_mesh.vertex.push_back(vertex);
     }
-    g_mesh.numVertex = g_mesh.vertex.size();
-
+    g_mesh.numVertex = g_mesh.vertex.size();*/
+    //LoadModel
+    //Le paso a LoadModel el tamanio de vertices que tenemos en g_mesh para que cargue el objeto
+    //g_mesh.numVertex = LD.vertex.size();
+    //g_mesh.numVertex = LD.numVertex;
+    //Aqui va el modelo
     // Create vertex buffer
-    g_vertexBuffer.init(g_device, g_mesh, D3D11_BIND_VERTEX_BUFFER);
 
     unsigned int indices[] =
     {
@@ -287,14 +298,13 @@ HRESULT InitDevice()
         23,20,22
     };
 
-    for (unsigned int index : indices)
-    {
-        g_mesh.index.push_back(index);
-    }
-    g_mesh.numIndex = g_mesh.index.size();
-
+    //for (unsigned int index : indices)
+    //{
+    //    g_mesh.index.push_back(index);
+    //}
+    //g_mesh.numIndex = g_mesh.index.size();
     // Create index buffer
-
+    //g_mesh.numIndex = LD.numIndex;
     g_indexBuffer.init(g_device, g_mesh, D3D11_BIND_INDEX_BUFFER);
 
 
@@ -420,11 +430,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
-
+//--------------------------------------------------------------------------------------
 // Render a frame
-
-
-void update()
+//--------------------------------------------------------------------------------------
+void Render()
 {
     // Update our time
     static float t = 0.0f;
@@ -448,12 +457,6 @@ void update()
     g_vMeshColor.x = 1.0f;//( sinf( t * 1.0f ) + 1.0f ) * 0.5f;
     g_vMeshColor.y = 1.0f;//( cosf( t * 3.0f ) + 1.0f ) * 0.5f;
     g_vMeshColor.z = 1.0f;//( sinf( t * 5.0f ) + 1.0f ) * 0.5f;
-
-}
-
-
-void Render()
-{
 
     //
     // Clear the back buffer
@@ -482,9 +485,11 @@ void Render()
     // Render the cube
     //
     g_shaderProgram.render(g_deviceContext);
+    //g_deviceContext.m_deviceContext->VSSetShader( g_pVertexShader, nullptr, 0 );
     g_deviceContext.m_deviceContext->VSSetConstantBuffers(0, 1, &g_pCBNeverChanges);
     g_deviceContext.m_deviceContext->VSSetConstantBuffers(1, 1, &g_pCBChangeOnResize);
     g_deviceContext.m_deviceContext->VSSetConstantBuffers(2, 1, &g_pCBChangesEveryFrame);
+    //g_deviceContext.m_deviceContext->PSSetShader( g_pPixelShader, nullptr, 0 );
     g_deviceContext.m_deviceContext->PSSetConstantBuffers(2, 1, &g_pCBChangesEveryFrame);
 
 
@@ -497,6 +502,7 @@ void Render()
     g_deviceContext.m_deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     g_deviceContext.m_deviceContext->DrawIndexed(g_mesh.numIndex, 0, 0);
+    //Cambiar a LD?
 
     //
     // Present our back buffer to our front buffer

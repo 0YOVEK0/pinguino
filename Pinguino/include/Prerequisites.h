@@ -1,37 +1,33 @@
 #pragma once
-//this are the structure to  relate librarys to the main ccp for it to work  also a little macro for debugging and keep it track the errors
-//std Lib
+// std lib
 #include <iostream>
 #include <sstream>
 #include <vector>
 #include <string>
-#include<chrono>
-#include <fstream>
+#include <chrono>
 
-
-//External Lib
+//External lib
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <xnamath.h>
-#include <math.h>
 
-//windows
+//Windows 
 #include <windows.h>
 
-//Internal Include
+//Internal Includes
 #include "Resource.h"
 
 // MACRO for safe release of resources
 #define SAFE_RELEASE(x) if(x != nullptr) x->Release(); x = nullptr;
 
-// * To check programm
-#define OutputLOG(_ClassName, _FunctionName, _OutputMessage)  \
-OutputDebugStringA(_ClassName);                               \
-OutputDebugStringA(" : In Function : ");                      \
-OutputDebugStringA(_FunctionName);                            \
-OutputDebugStringA(" : ");                                    \
-OutputDebugStringA(_OutputMessage);                           \
+// * To check monster
+#define OutputLOG(_ClassName, _FunctionName, _OutputMessage)           \
+OutputDebugStringA(_ClassName);                                        \
+OutputDebugStringA(" : In Function : ");                               \
+OutputDebugStringA(_FunctionName);                                     \
+OutputDebugStringA(" : ");                                             \
+OutputDebugStringA(_OutputMessage);                                    \
 OutputDebugStringA("\n");
 
 #define WARNING( s )                         \
@@ -51,6 +47,14 @@ struct SimpleVertex
 
 };
 
+struct LoadData
+{
+	std::string name;
+	std::vector <SimpleVertex> vertex;
+	std::vector <unsigned int> index;
+	int numVertex;
+	int numIndex;
+};
 
 
 

@@ -1,6 +1,22 @@
+// OBJ_Loader.h - A Single Header OBJ Model Loader
 #pragma once
-#include "Prerequisites.h"
 
+// Iostream - STD I/O Library
+#include <iostream>
+
+// Vector - STD Vector/Array Library
+#include <vector>
+
+// String - STD String Library
+#include <string>
+
+// fStream - STD File I/O Library
+#include <fstream>
+
+// Math.h - STD math Library
+#include <math.h>
+
+// Print progress to console while loading (large models)
 #define OBJL_CONSOLE_OUTPUT
 
 // Namespace: OBJL
